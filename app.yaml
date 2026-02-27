@@ -1,0 +1,19 @@
+# app.yaml: The main configuration file for your Arduino App.
+# This file describes the application's metadata and properties.
+
+# The user-visible name of the application.
+name: Diabetes Classification App
+
+# A brief description of what the application does.
+description: "Classify diabetes risk in real time with a PyTorch model and see predictions on an Arduino LED matrix by entering patient measurements via the web interface."
+
+# The icon for the application, can be an emoji or a short string.
+icon: 🩺
+
+# A list of network ports that the application exposes.
+# Example: [80, 443]
+ports: [7000]
+
+# A list of bricks used by this application.
+bricks:
+  - arduino:web_ui

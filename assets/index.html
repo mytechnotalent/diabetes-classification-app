@@ -1,0 +1,121 @@
+<!--
+SPDX-FileCopyrightText: Copyright (C) Kevin Thomas
+
+SPDX-License-Identifier: MPL-2.0
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCA</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div>
+        <div class="header">
+            <h1 class="arduino-text">Diabetes Classification App</h1>
+        </div>
+
+        <div class="container">
+            <form id="diabetes-form">
+                <div class="form-group">
+                    <label for="bmi">BMI:</label>
+                    <input type="text" id="bmi" placeholder="e.g., 31.5" required>
+                    <div class="error-msg" id="bmi-error">Please enter a valid float (e.g., 31.5)</div>
+                </div>
+                <div class="form-group">
+                    <label for="waist-circumference">Waist Circumference (cm):</label>
+                    <input type="text" id="waist-circumference" placeholder="e.g., 95.0" required>
+                    <div class="error-msg" id="wc-error">Please enter a valid float (e.g., 95.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="daily-calorie-intake">Daily Calorie Intake:</label>
+                    <input type="text" id="daily-calorie-intake" placeholder="e.g., 2800.0" required>
+                    <div class="error-msg" id="dci-error">Please enter a valid float (e.g., 2800.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="triglycerides-level">Triglycerides Level:</label>
+                    <input type="text" id="triglycerides-level" placeholder="e.g., 220.0" required>
+                    <div class="error-msg" id="tl-error">Please enter a valid float (e.g., 220.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="fasting-glucose-level">Fasting Glucose Level:</label>
+                    <input type="text" id="fasting-glucose-level" placeholder="e.g., 120.0" required>
+                    <div class="error-msg" id="fgl-error">Please enter a valid float (e.g., 120.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="hba1c-level">HbA1c Level:</label>
+                    <input type="text" id="hba1c-level" placeholder="e.g., 6.5" required>
+                    <div class="error-msg" id="hba1c-error">Please enter a valid float (e.g., 6.5)</div>
+                </div>
+                <div class="form-group">
+                    <label for="sugar-intake">Sugar Intake (grams/day):</label>
+                    <input type="text" id="sugar-intake" placeholder="e.g., 60.0" required>
+                    <div class="error-msg" id="si-error">Please enter a valid float (e.g., 60.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="blood-pressure">Blood Pressure:</label>
+                    <input type="text" id="blood-pressure" placeholder="e.g., 140.0" required>
+                    <div class="error-msg" id="bp-error">Please enter a valid float (e.g., 140.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="insulin-level">Insulin Level:</label>
+                    <input type="text" id="insulin-level" placeholder="e.g., 15.0" required>
+                    <div class="error-msg" id="il-error">Please enter a valid float (e.g., 15.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="cholesterol-level">Cholesterol Level:</label>
+                    <input type="text" id="cholesterol-level" placeholder="e.g., 240.0" required>
+                    <div class="error-msg" id="cl-error">Please enter a valid float (e.g., 240.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="stress-level">Stress Level (0-10):</label>
+                    <input type="text" id="stress-level" placeholder="e.g., 7.0" required>
+                    <div class="error-msg" id="stl-error">Please enter a valid float (e.g., 7.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="bmi-category">BMI Category (encoded):</label>
+                    <input type="text" id="bmi-category" placeholder="e.g., 2.0" required>
+                    <div class="error-msg" id="bc-error">Please enter a valid float (e.g., 2.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="physical-activity-level">Physical Activity Level (encoded):</label>
+                    <input type="text" id="physical-activity-level" placeholder="e.g., 1.0" required>
+                    <div class="error-msg" id="pal-error">Please enter a valid float (e.g., 1.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="glucose-category">Glucose Category (encoded):</label>
+                    <input type="text" id="glucose-category" placeholder="e.g., 1.0" required>
+                    <div class="error-msg" id="gc-error">Please enter a valid float (e.g., 1.0)</div>
+                </div>
+                <div class="form-group">
+                    <label for="sleep-hours">Sleep Hours:</label>
+                    <input type="text" id="sleep-hours" placeholder="e.g., 5.5" required>
+                    <div class="error-msg" id="sh-error">Please enter a valid float (e.g., 5.5)</div>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="text" id="age" placeholder="e.g., 45.0" required>
+                    <div class="error-msg" id="age-error">Please enter a valid float (e.g., 45.0)</div>
+                </div>
+                <button type="submit" id="predict-btn">Predict Risk</button>
+            </form>
+
+            <div id="result" class="result" style="display:none;">
+                <span id="result-text"></span>
+            </div>
+
+            <div id="error-container" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

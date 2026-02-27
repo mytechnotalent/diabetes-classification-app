@@ -1,0 +1,16 @@
+# FILE: requirements.txt
+#
+# DESCRIPTION:
+#   Python package dependencies for Diabetes Classification App.
+#   Specifies exact versions optimized for Arduino UNO Q ARM deployment.
+#
+# BRIEF:
+#   Lists PyTorch (CPU), scikit-learn, and joblib with ARM-compatible versions.
+#
+# AUTHOR: Kevin Thomas
+# CREATION DATE: February 27, 2026
+# UPDATE DATE: February 27, 2026
+
+scikit-learn==1.8.0
+torch==2.6.0
+joblib==1.5.3
